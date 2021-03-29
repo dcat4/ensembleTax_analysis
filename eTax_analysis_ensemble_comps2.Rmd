@@ -69,8 +69,8 @@ identical(bayes.pr2[, 1:2], bayes.silva[, 1:2])
 identical(bayes.pr2[, 1:2], idtax.silva[, 1:2])
 identical(bayes.pr2[, 1:2], idtax.pr2[, 1:2])
 
-seqtab <- readRDS("~/Documents/R/amplicon_bioinformatics/tax_pipe_Mar20/seqtab_nochime_Mar20.rds")
-samsub <- readRDS("~/Documents/R/amplicon_bioinformatics/tax_pipe_Mar20/sample_subsets.rds")
+seqtab <- readRDS("initial_tax_tabs/seqtab_nochime_Mar20.rds")
+samsub <- readRDS("initial_tax_tabs/sample_subsets.rds")
 subber <- c(samsub$pbsurf, samsub$pbdeep)
 seqtab <- seqtab[ row.names(seqtab) %in% subber , ]
 rm.me <- which(colSums(seqtab) == 0)
