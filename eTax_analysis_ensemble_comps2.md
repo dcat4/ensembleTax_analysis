@@ -524,7 +524,7 @@ p.pr2.2 <- ggplot(yaboi, aes(fill = variable, x = rankz, y = value)) +
     geom_bar(stat="identity", color = "black", position=position_dodge(width=0.8)) + 
     labs(x = "Taxonomic Rank", y = "Proportion of ASVs Unassigned") + 
     scale_x_discrete(limits = colnames(xx.pr2[[1]])) + 
-    scale_y_discrete(limits = seq(0,1.05,0.1), expand = c(0,0)) +
+    scale_y_continuous(limits = seq(0,1.05,0.1), expand = c(0,0)) +
     coord_cartesian(ylim = c(0, 1)) + 
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_text(size = 12, face="bold"),
           axis.text.y = element_text(size = 12), axis.title.y = element_text(size = 12, face="bold"),
@@ -540,12 +540,8 @@ p.pr2.2 <- ggplot(yaboi, aes(fill = variable, x = rankz, y = value)) +
     scale_fill_manual(name = "Taxonomy table",
                       breaks = names(xx.pr2),
                       values = cbPalette)
-```
 
-    ## Warning: Continuous limits supplied to discrete scale.
-    ## Did you mean `limits = factor(...)` or `scale_*_continuous()`?
 
-``` r
 # silvas:
 xx.silva <- list(idtax.pr2.mapped2silva, bayes.pr2.mapped2silva,
                idtax.silva, bayes.silva, 
@@ -565,7 +561,7 @@ p.silva.2 <- ggplot(yaboi, aes(fill = variable, x = rankz, y = value)) +
     geom_bar(stat="identity", color = "black", position=position_dodge(width=0.8)) + 
     labs(x = "Taxonomic Rank", y = "Proportion of ASVs Unassigned") + 
     scale_x_discrete(limits = colnames(xx.silva[[1]])) + 
-    scale_y_discrete(limits = seq(0,1.05,0.1), expand = c(0,0)) +
+    scale_y_continuous(limits = seq(0,1.05,0.1), expand = c(0,0)) +
     coord_cartesian(ylim = c(0, 1)) + 
     theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), axis.title.x = element_text(size = 12, face="bold"),
           axis.text.y = element_text(size = 12), axis.title.y = element_text(size = 12, face="bold"),
@@ -582,9 +578,6 @@ p.silva.2 <- ggplot(yaboi, aes(fill = variable, x = rankz, y = value)) +
                       breaks = names(xx.pr2),
                       values = cbPalette)
 ```
-
-    ## Warning: Continuous limits supplied to discrete scale.
-    ## Did you mean `limits = factor(...)` or `scale_*_continuous()`?
 
 Nice. Let's do some comparisons of the assignments between the ensembles and the individual taxonomy tables:
 
@@ -768,13 +761,22 @@ p.all <- plot_grid(
   hjust=-1,
   nrow=1
 )
+```
+
+    ## Warning: Removed 45 rows containing missing values (geom_bar).
+
+``` r
 legend_b <- get_legend(p.pr2.2 + 
                          theme(legend.position="bottom",
                               legend.text=element_text(size=14),
                               legend.title = element_text(size=14),
                               legend.justification="center",
                               legend.box.margin = unit(c(0.1, 1, 0.1, 1),"cm")))
+```
 
+    ## Warning: Removed 45 rows containing missing values (geom_bar).
+
+``` r
 p.all <- plot_grid(p.all, legend_b, nrow=2, rel_heights=c(1, 0.3))
 ggsave("all_pr2_plots_protists", plot = p.all, device = "pdf", width = 18, height = 7.5)
 ```
@@ -882,13 +884,22 @@ p.silva <- plot_grid(
   hjust=-1,
   nrow=1
 )
+```
+
+    ## Warning: Removed 33 rows containing missing values (geom_bar).
+
+``` r
 legend_b <- get_legend(p.pr2.2 + 
                          theme(legend.position="bottom",
                               legend.text=element_text(size=14),
                               legend.title = element_text(size=14),
                               legend.justification="center",
                               legend.box.margin = unit(c(0.1, 1, 0.1, 1),"cm")))
+```
 
+    ## Warning: Removed 45 rows containing missing values (geom_bar).
+
+``` r
 p.silva <- plot_grid(p.silva, legend_b, nrow=2, rel_heights=c(1, 0.3))
 ggsave("all_silva_plots_protists", plot = p.silva, device = "pdf", width = 18, height = 7.5)
 
@@ -909,6 +920,11 @@ p.all <- plot_grid(
   hjust=-1,
   nrow=3
 )
+```
+
+    ## Warning: Removed 45 rows containing missing values (geom_bar).
+
+``` r
 p.silva <- plot_grid(
   p.silva.2 + theme(legend.position = "none", plot.margin = unit(c(1, 0.5, 0, 0.5), "cm"), title = element_text(face = "bold")) + ggtitle("silva taxonomic nomenclature") + theme(plot.title = element_text(hjust = 0.5)),
   p.comp1.silva + theme(legend.position = "none", plot.margin = unit(c(1, 0.5, 0, 0.5), "cm")),
@@ -919,12 +935,22 @@ p.silva <- plot_grid(
   hjust=-1,
   nrow=3
 )
+```
+
+    ## Warning: Removed 33 rows containing missing values (geom_bar).
+
+``` r
 legend_b <- get_legend(p.pr2.2 + 
                          theme(legend.position="right",
                               legend.text=element_text(size=14),
                               legend.title = element_text(size=14, face = "bold"),
                               legend.justification="left",
                               legend.box.margin = unit(c(0.1, 1, 0.1, 1),"cm")))
+```
+
+    ## Warning: Removed 45 rows containing missing values (geom_bar).
+
+``` r
 p.all.2 <- plot_grid(p.all, p.silva, legend_b, nrow=1)
 ggsave("enscomps_plots_pr2ANDsilva_protists_3x2", plot = p.all.2, device = "pdf", width = 11, height = 12)
 ```
